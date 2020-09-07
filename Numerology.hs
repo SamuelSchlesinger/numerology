@@ -74,7 +74,7 @@ type One = 'S 'Z
 type Two = 'S One
 type Three = 'S Two
 type Four = 'S Three
-
+type Five = 'S Four
 
 
 test :: ()
@@ -87,10 +87,11 @@ test = fold
   , f
   , g
   , h
+  , j
   ]
-a :: Associative One Two Three => ()
+a :: Associative (One + Five + Four + Two) (Two + Five + Three) Three => ()
 a = ()
-b :: Associative Three Two One => ()
+b :: Associative (Three + Four + Two + One) (Two + 'Z + One) One => ()
 b = ()
 c :: Associative Four Four Four => ()
 c = ()
@@ -104,6 +105,8 @@ g :: Commutative One Three => ()
 g = ()
 h :: Commutative Two Four => ()
 h = ()
+j :: SubbyInverse (Four + Four + Four + Four) (Five + Five) => ()
+j = ()
 
 type family (-) (a :: N) (b :: N) :: N where
   'S n - 'S m = n - m
